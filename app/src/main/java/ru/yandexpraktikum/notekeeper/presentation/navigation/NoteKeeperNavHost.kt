@@ -14,54 +14,49 @@ import ru.yandexpraktikum.add_note.presentation.AddNoteScreen
 import ru.yandexpraktikum.add_note.presentation.AddNoteViewModel
 import ru.yandexpraktikum.all_notes.presentation.AllNotesScreen
 import ru.yandexpraktikum.all_notes.presentation.AllNotesViewModel
-import ru.yandexpraktikum.notekeeper.di.AppContainer
+import ru.yandexpraktikum.notekeeper.di.ApplicationComponent
 
 @Composable
 fun NoteKeeperNavHost(
-    appContainer: AppContainer,
-    navController: NavHostController
+    appContainer: ApplicationComponent,
+    navController: NavHostController,
 ) {
     NavHost(
-        navController = navController,
-        startDestination = Screen.AllNotes.route
+        navController = navController, startDestination = Screen.AllNotes.route
     ) {
         composable(route = Screen.AllNotes.route) {
-            var allNotesContainer by remember { mutableStateOf<Any?>(null) }
+            var allNotesSubcomponent by remember { mutableStateOf<Any?>(null) }
             DisposableEffect(Unit) {
-                allNotesContainer = appContainer.getAllNotesContainer()
+                allNotesSubcomponent = appContainer.provideAllNotesSubcomponent().create()
                 onDispose {
-                    appContainer.releaseAllNotesContainer()
-                    allNotesContainer = null
+                    allNotesSubcomponent = null
                 }
             }
             val vm: AllNotesViewModel = viewModel(
-                factory = appContainer.getAllNotesContainer()?.getAllNotesViewModelFactory()
+                factory = appContainer.provideAllNotesSubcomponent().create()
+                    .provideAllNoteViewModelFactory()
             )
             AllNotesScreen(
-                viewModel = vm,
-                onAddNoteClick = {
+                viewModel = vm, onAddNoteClick = {
                     navController.navigate(Screen.AddNote.route)
-                }
-            )
+                })
         }
         composable(route = Screen.AddNote.route) {
-            var addNoteContainer by remember { mutableStateOf<Any?>(null) }
+            var addNoteSubcomponent by remember { mutableStateOf<Any?>(null) }
             DisposableEffect(Unit) {
-                addNoteContainer = appContainer.getAddNoteContainer()
+                addNoteSubcomponent = appContainer.provideAddNoteSubcomponent().create()
                 onDispose {
-                    appContainer.releaseAddNoteContainer()
-                    addNoteContainer = null
+                    addNoteSubcomponent = null
                 }
             }
             val vm: AddNoteViewModel = viewModel(
-                factory = appContainer.getAddNoteContainer()?.getAddNoteViewModelFactory()
+                factory = appContainer.provideAddNoteSubcomponent().create()
+                    .provideAddNoteViewModelFactory()
             )
             AddNoteScreen(
-                viewModel = vm,
-                onBackClick = {
+                viewModel = vm, onBackClick = {
                     navController.popBackStack()
-                }
-            )
+                })
         }
     }
 }
