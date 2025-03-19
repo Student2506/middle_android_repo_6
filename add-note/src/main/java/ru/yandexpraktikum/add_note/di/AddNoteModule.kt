@@ -9,5 +9,6 @@ import ru.yandexpraktikum.add_note.domain.interactors.AddNoteInteractorImpl
 interface AddNoteModule {
 
     @Binds
-    fun provideAddNoteUsecase(impl: AddNoteInteractorImpl): AddNoteInteractor
+    @AddNoteScope
+    fun provideAddNoteInteractor(impl: AddNoteInteractorImpl): AddNoteInteractor
 }
