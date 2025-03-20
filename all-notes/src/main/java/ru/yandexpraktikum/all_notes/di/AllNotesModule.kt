@@ -12,7 +12,7 @@ import ru.yandexpraktikum.all_notes.presentation.AllNotesViewModel
 
 @Module
 @InstallIn(ViewModelComponent::class)
-interface AllNotesModule {
+internal interface AllNotesModule {
 
     @Binds
     fun provideFetchAllNotesInteractor(impl: FetchAllNotesInteractorImpl): FetchAllNotesInteractor

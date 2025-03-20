@@ -9,7 +9,7 @@ import ru.yandexpraktikum.core.domain.repository.NotesRepository
 import javax.inject.Inject
 
 
-class NotesRepositoryImpl @Inject constructor (
+internal class NotesRepositoryImpl @Inject constructor (
     private val noteDao: NoteDao,
     private val noteMapper: DataNoteMapper
 ): NotesRepository {

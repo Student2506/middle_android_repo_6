@@ -9,7 +9,7 @@ import ru.yandexpraktikum.add_note.domain.interactors.AddNoteInteractorImpl
 
 @Module
 @InstallIn(ViewModelComponent::class)
-interface AddNoteModule {
+internal interface AddNoteModule {
 
     @Binds
     fun provideAddNoteInteractor(impl: AddNoteInteractorImpl): AddNoteInteractor

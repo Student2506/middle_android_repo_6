@@ -5,7 +5,7 @@ import ru.yandexpraktikum.core.domain.model.Note
 import ru.yandexpraktikum.core.domain.repository.NotesRepository
 import javax.inject.Inject
 
-class FetchAllNotesInteractorImpl @Inject constructor(
+internal class FetchAllNotesInteractorImpl @Inject constructor(
     private val repository: NotesRepository,
 ) : FetchAllNotesInteractor {
     override fun invoke(): Flow<List<Note>> {

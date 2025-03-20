@@ -18,7 +18,7 @@ private const val DATABASE_NAME = "note_database"
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface CoreModule {
+internal interface CoreModule {
 
     @Binds
     @Singleton
