@@ -7,8 +7,8 @@ import dagger.hilt.android.components.ViewModelComponent
 import ru.yandexpraktikum.add_note.domain.interactors.AddNoteInteractor
 import ru.yandexpraktikum.add_note.domain.interactors.AddNoteInteractorImpl
 
-@InstallIn(ViewModelComponent::class)
 @Module
+@InstallIn(ViewModelComponent::class)
 interface AddNoteModule {
 
     @Binds
