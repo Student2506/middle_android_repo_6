@@ -6,11 +6,10 @@ import ru.yandexpraktikum.core.data.db.NoteDao
 import ru.yandexpraktikum.core.data.mappers.DataNoteMapper
 import ru.yandexpraktikum.core.domain.model.Note
 import ru.yandexpraktikum.core.domain.repository.NotesRepository
+import javax.inject.Inject
 
-/**
- * TODO("Add documentation")
- */
-class NotesRepositoryImpl(
+
+internal class NotesRepositoryImpl @Inject constructor (
     private val noteDao: NoteDao,
     private val noteMapper: DataNoteMapper
 ): NotesRepository {
