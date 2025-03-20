@@ -6,6 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ru.yandexpraktikum.core.data.db.NoteDao
 import ru.yandexpraktikum.core.data.db.NoteDatabase
@@ -26,9 +27,9 @@ interface CoreModule {
     companion object {
         @Provides
         @Singleton
-        fun provideNoteDatabase(context: Context): NoteDatabase {
+        fun provideNoteDatabase(@ApplicationContext context: Context): NoteDatabase {
             return Room.databaseBuilder(
-                context.applicationContext, NoteDatabase::class.java, DATABASE_NAME
+                context, NoteDatabase::class.java, DATABASE_NAME
             ).build()
         }
 
